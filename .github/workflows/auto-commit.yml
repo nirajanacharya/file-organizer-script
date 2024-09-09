@@ -1,8 +1,10 @@
-name: Auto Commit to Maintain GitHub Streak
+name: CI
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -12,17 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Git config
-        run: |
-          git config --global user.name 'nirajanacharya'
-          git config --global user.email 'nirajan.acharya666@gmail.com'
-
-      - name: Make a dummy commit
+      - name: Make a commit to maintain streak
         run: |
           date >> README.md
+          git config --global user.name "Your Name"
+          git config --global user.email "nirajan.acharya666@gmail.com"
           git add README.md
           git commit -m "Auto commit to maintain streak"
-          git push
-
-      - name: Success
-        run: echo "GitHub streak maintained!"
+          git push https://$GITHUB_ACTOR:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git HEAD:main
