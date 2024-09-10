@@ -30,4 +30,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          git push https://nirajanacharya666:${{ secrets.GH_PAT }}@github.com/nirajanacharya/repo-name.git
+          git push https://nirajanacharya666:${{ secrets.GH_PAT }}@github.com/nirajanacharya/file-organizer-script.git
